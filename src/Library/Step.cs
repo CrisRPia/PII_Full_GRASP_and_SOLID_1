@@ -16,6 +16,24 @@ namespace Full_GRASP_And_SOLID.Library
             this.Equipment = equipment;
         }
 
+        // Por expert, step debe saber calcular el precio total de sus
+        // ingredientes.
+        // Asumo que el tiempo es en segundos.
+        public double EquipmentCost
+        {
+            // Costo equipamiento = sumatoria de tiempo de uso * costo/hora
+            // del equipo para todos los pasos de la receta.
+            get { return Equipment.HourlyCost * Time / 3600; }
+        }
+
+        // Por expert, step debe saber calcular el precio total del uso de su
+        // equipamiento.
+        public double InputCost
+        {
+            // Costo insumos = sumatoria de costo unitario de insumos.
+            get { return Input.UnitCost * Quantity; }
+        }
+
         public Product Input { get; set; }
 
         public double Quantity { get; set; }

@@ -15,6 +15,21 @@ namespace Full_GRASP_And_SOLID.Library
 
         public Product FinalProduct { get; set; }
 
+        // Por expert, le añado la responsibilidad de calcular el costo total
+        // de producir un producto a la receta, pues ella conoce todos los datos
+        // necesarios (ingredientes, equipamiento y tiempo para cada paso).
+        public double GetProductionCost() {
+            double total = 0;
+
+            // Costo 
+            foreach (Step step in steps) {
+                total += step.InputCost;
+
+                total += step.EquipmentCost;
+            }
+            return total;
+        }
+
         public void AddStep(Step step)
         {
             this.steps.Add(step);
@@ -33,6 +48,7 @@ namespace Full_GRASP_And_SOLID.Library
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
+            Console.WriteLine($"Costo total: {GetProductionCost()}");
         }
     }
 }
